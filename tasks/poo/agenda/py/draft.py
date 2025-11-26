@@ -1,12 +1,26 @@
 class Fone:
     def __init__(self, id: str, number: str):
-        self.id: str = id
-        self.number: str = number
+        self.__id: str = id
+        self.__number: str = number
 
     def getId(self) -> str:
-        return self.id
+        return self.__id
     
     def getNumber(self) -> str:
-        return self.number
+        return self.__number
     
+    def isValid(self) -> bool:
+        valid: str = "1234567890()."
+        for c in self.__number:
+            if c not in valid:
+                return False
+        return True
     
+    def __str__(self) -> str:
+        return f"{self.__id}:{self.__number}"
+    
+class Contato:
+    def __init__(self, name: str):
+        self.__name: str = name
+        self.__fone: list[Fone]
+        self.__

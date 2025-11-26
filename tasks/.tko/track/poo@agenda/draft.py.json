@@ -2,8 +2,13 @@
     "patches": [
         {
             "label": "2025-11-24_16-46-15",
-            "content": "",
+            "content": "@@ -1,397 +0,0 @@\n-class Fone:%0A    def __init__(self, id: str, number: str):%0A        self.__id: str = id%0A        self.__number: str = number%0A%0A    def getId(self) -%3E str:%0A        return self.__id%0A    %0A    def getNumber(self) -%3E str:%0A        return self.__number%0A    %0A    def isValid(self) -%3E bool:%0A        valid: str = %221234567890().%22%0A        for i in self.__number:%0A            if i is not in valid:%0A                \n",
             "lines": "0"
+        },
+        {
+            "label": "2025-11-26_16-05-54",
+            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.__id: str = id\n        self.__number: str = number\n\n    def getId(self) -> str:\n        return self.__id\n    \n    def getNumber(self) -> str:\n        return self.__number\n    \n    def isValid(self) -> bool:\n        valid: str = \"1234567890().\"\n        for i in self.__number:\n            if i is not in valid:\n                ",
+            "lines": "16"
         }
     ]
 }
