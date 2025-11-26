@@ -22,8 +22,33 @@
         },
         {
             "label": "2025-11-26_17-33-11",
-            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.__id: str = id\n        self.__number: str = number\n\n    def getId(self) -> str:\n        return self.__id\n    \n    def getNumber(self) -> str:\n        return self.__number\n    \n    def isValid(self) -> bool:\n        valid: str = \"1234567890().\"\n        for c in self.__number:\n            if c not in valid:\n                return False\n        return True\n    \n    def __str__(self) -> str:\n        return f\"{self.__id}:{self.__number}\"\n    \nclass Contato:\n    def __init__(self, name: str):\n        self.__name: str = name\n        self.__fone: list[Fone] = []\n        self.__favorito: bool = False\n\n    def addFone(self, id: str, number: str) -> None:\n        tel = Fone(id, number)\n\n        if tel.isValid():\n            self.__fone.append(tel)\n        else:\n            raise Exception (\"fail: telefone invalido\")\n        \n    def rmFone(self, index: int):\n        if index < len(self.__fone):\n            self.__fone.pop(index)\n\n    def toogleFone(self) -> None:\n        \n",
+            "content": "@@ -1040,17 +1040,8 @@\n        %0A\n-        %0A\n",
             "lines": "41"
+        },
+        {
+            "label": "2025-11-26_17-53-38",
+            "content": "@@ -1032,16 +1032,25 @@\n  None:%0A        %0A\n+        %0A\n",
+            "lines": "42"
+        },
+        {
+            "label": "2025-11-26_18-04-56",
+            "content": "@@ -1040,9 +1040,8 @@\n        %0A\n-%0A\n",
+            "lines": "41"
+        },
+        {
+            "label": "2025-11-26_18-15-00",
+            "content": "@@ -1043,396 +1043,6 @@\n     \n-if self.__favorito == False:%0A            self.__favorito = True%0A        else:%0A            self.__favorito = False%0A        %0A    def isFavorito(self) -%3E bool:%0A        return self.__favorito%0A%0A    def getFone(self) -%3E list%5BFone%5D:%0A        return self.__favorito%0A    %0A    def getName(self) -%3E str:%0A        return self.__name%0A    %0A    def setName(self, name: str) -%3E None:%0A        self.__name = name\n+%0A%0A\n",
+            "lines": "42"
+        },
+        {
+            "label": "2025-11-26_18-40-12",
+            "content": "@@ -961,17 +961,16 @@\n _fone):%0A\n-%0A\n         \n@@ -1435,109 +1435,4 @@\n name\n-%0A    %0A    def __str__(self) -%3E str:%0A        fones = %22%22%0A        %0A%0A        return f%22- %7Bself.__name%7D %5B%7B%7D%5D%22%0A%0A\n",
+            "lines": "56"
+        },
+        {
+            "label": "2025-11-26_19-07-07",
+            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.__id: str = id\n        self.__number: str = number\n\n    def getId(self) -> str:\n        return self.__id\n    \n    def getNumber(self) -> str:\n        return self.__number\n    \n    def isValid(self) -> bool:\n        valid: str = \"1234567890().\"\n        for c in self.__number:\n            if c not in valid:\n                return False\n        return True\n    \n    def __str__(self) -> str:\n        return f\"{self.__id}:{self.__number}\"\n    \nclass Contato:\n    def __init__(self, name: str):\n        self.__name: str = name\n        self.__fone: list[Fone] = []\n        self.__favorito: bool = False\n\n    def addFone(self, id: str, number: str) -> None:\n        tel = Fone(id, number)\n\n        if tel.isValid():\n            self.__fone.append(tel)\n        else:\n            raise Exception (\"fail: telefone invalido\")\n        \n    def rmFone(self, index: int):\n        if index < len(self.__fone):\n\n            self.__fone.pop(index)\n\n    def toogleFone(self) -> None:\n        if self.__favorito == False:\n            self.__favorito = True\n        else:\n            self.__favorito = False\n        \n    def isFavorito(self) -> bool:\n        return self.__favorito\n\n    def getFone(self) -> list[Fone]:\n        return self.__favorito\n    \n    def getName(self) -> str:\n        return self.__name\n    \n    def setName(self, name: str) -> None:\n        self.__name = name\n    \n    def __str__(self) -> str:\n        fones = \"\"\n        \n\n        return f\"- {self.__name} [{}]\"\n\n",
+            "lines": "64"
         }
     ]
 }

@@ -35,7 +35,30 @@ class Contato:
         
     def rmFone(self, index: int):
         if index < len(self.__fone):
+
             self.__fone.pop(index)
 
     def toogleFone(self) -> None:
+        if self.__favorito == False:
+            self.__favorito = True
+        else:
+            self.__favorito = False
         
+    def isFavorito(self) -> bool:
+        return self.__favorito
+
+    def getFone(self) -> list[Fone]:
+        return self.__favorito
+    
+    def getName(self) -> str:
+        return self.__name
+    
+    def setName(self, name: str) -> None:
+        self.__name = name
+    
+    def __str__(self) -> str:
+        fones = ""
+        
+
+        return f"- {self.__name} [{}]"
+
