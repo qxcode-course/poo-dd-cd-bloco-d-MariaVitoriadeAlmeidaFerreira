@@ -7,8 +7,23 @@
         },
         {
             "label": "2025-11-26_16-05-54",
-            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.__id: str = id\n        self.__number: str = number\n\n    def getId(self) -> str:\n        return self.__id\n    \n    def getNumber(self) -> str:\n        return self.__number\n    \n    def isValid(self) -> bool:\n        valid: str = \"1234567890().\"\n        for i in self.__number:\n            if i is not in valid:\n                ",
+            "content": "@@ -320,17 +320,17 @@\n     for \n-c\n+i\n  in self\n@@ -359,442 +359,39 @@\n  if \n-c not in valid:%0A                return False%0A        return True%0A    %0A    def __str__(self) -%3E str:%0A        return f%22%7Bself.__id%7D:%7Bself.__number%7D%22%0A    %0Aclass Contato:%0A    def __init__(self, name: str):%0A        self.__name: str = name%0A        self.__fone: list%5BFone%5D = %5B%5D%0A        self.__favorito: bool = False%0A%0A    def addFone(self, id: str, number: str) -%3E None:%0A        tel = Fone(id, number)%0A%0A        if tel.isValid():%0A            %0A    %0A\n+i is not in valid:%0A                \n",
             "lines": "16"
+        },
+        {
+            "label": "2025-11-26_16-59-59",
+            "content": "@@ -791,110 +791,8 @@\n     \n-self.__fone.append(tel)%0A        else:%0A            raise Exception (%22fail: telefone invalido%22)%0A        \n %0A   \n",
+            "lines": "33"
+        },
+        {
+            "label": "2025-11-26_17-10-03",
+            "content": "@@ -898,150 +898,5 @@\n     \n-def rmFone(self, index: int):%0A        if index %3C len(self.__fone):%0A            self.__fone.pop(index)%0A%0A    def toogleFone(self) -%3E None:%0A        \n %0A\n",
+            "lines": "36"
+        },
+        {
+            "label": "2025-11-26_17-33-11",
+            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.__id: str = id\n        self.__number: str = number\n\n    def getId(self) -> str:\n        return self.__id\n    \n    def getNumber(self) -> str:\n        return self.__number\n    \n    def isValid(self) -> bool:\n        valid: str = \"1234567890().\"\n        for c in self.__number:\n            if c not in valid:\n                return False\n        return True\n    \n    def __str__(self) -> str:\n        return f\"{self.__id}:{self.__number}\"\n    \nclass Contato:\n    def __init__(self, name: str):\n        self.__name: str = name\n        self.__fone: list[Fone] = []\n        self.__favorito: bool = False\n\n    def addFone(self, id: str, number: str) -> None:\n        tel = Fone(id, number)\n\n        if tel.isValid():\n            self.__fone.append(tel)\n        else:\n            raise Exception (\"fail: telefone invalido\")\n        \n    def rmFone(self, index: int):\n        if index < len(self.__fone):\n            self.__fone.pop(index)\n\n    def toogleFone(self) -> None:\n        \n",
+            "lines": "41"
         }
     ]
 }

@@ -22,5 +22,20 @@ class Fone:
 class Contato:
     def __init__(self, name: str):
         self.__name: str = name
-        self.__fone: list[Fone]
-        self.__
+        self.__fone: list[Fone] = []
+        self.__favorito: bool = False
+
+    def addFone(self, id: str, number: str) -> None:
+        tel = Fone(id, number)
+
+        if tel.isValid():
+            self.__fone.append(tel)
+        else:
+            raise Exception ("fail: telefone invalido")
+        
+    def rmFone(self, index: int):
+        if index < len(self.__fone):
+            self.__fone.pop(index)
+
+    def toogleFone(self) -> None:
+        
