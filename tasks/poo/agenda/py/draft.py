@@ -54,11 +54,14 @@ class Contato:
         return self.__name
     
     def setName(self, name: str) -> None:
-        self.__name = name
-    
-    def __str__(self) -> str:
-        fones = ""
-        
+        self.__name = name 
 
-        return f"- {self.__name} [{}]"
+    def __str__(self) -> str:
+        fones = ", ".join([str(x) for x in self.__fone])
+
+        return f"- {self.__name} [{fones}]"
+    
+class Agenda:
+    def __init__(self):
+        
 
