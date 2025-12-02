@@ -74,15 +74,20 @@ class Agenda:
     def addcontato(self, name: str, fones: list[Fone]) -> None:
         index: int = self.__acharPosDoNome(name)
 
-        if index < 0:
-            cel = Contato(name) 
-            for i in fones:           
-                [id, number] = i.split(":")
-                cel.addFone()
-            self.__contato.append(cel)
+        if index != -1:
+            cont_existe = self.__contato[index]
+            for index in fones:
+                cont_existe.addFone(fones.getId(), fones.getNumber())
+            
+        else:
+            contato_novo = Contato(name)
+            for index in fones:
+                contato_novo.addFone(fones.getId(), fones.getNumber())
+                return 
+            self.__contato.append(contato_novo)
 
-
-
+    def __str__(self) -> str:
+        return f"\n".join(str(Contato) for Contato in self.__contato)
 
 def main():
     agenda = Agenda
@@ -94,6 +99,9 @@ def main():
             break
         elif args[0] == "show":
             print(agenda)
+        elif args[0] == "add":
+            name = args[1]
+            fones_list = (args[2])
 
 main()
 
