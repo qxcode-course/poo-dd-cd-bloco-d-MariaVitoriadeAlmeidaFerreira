@@ -65,13 +65,24 @@ class Agenda:
     def __init__(self):
         self.__contato: list[Contato] = []
 
-    def __findPosByName(self, name: str) -> int:
+    def __acharPosDoNome(self, name: str) -> int:
         for i in range (0, len(self.__contato)-1):
             if name == self.__contato[i]:
                 return i
         return -1
     
-    
+    def addcontato(self, name: str, fones: list[Fone]) -> None:
+        index: int = self.__acharPosDoNome(name)
+
+        if index < 0:
+            cel = Contato(name) 
+            for i in fones:           
+                [id, number] = i.split(":")
+                cel.addFone()
+            self.__contato.append(cel)
+
+
+
 
 def main():
     agenda = Agenda
