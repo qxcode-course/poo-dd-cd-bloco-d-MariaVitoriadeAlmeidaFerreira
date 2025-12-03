@@ -34,8 +34,7 @@ class Contato:
             raise Exception ("fail: telefone invalido")
         
     def rmFone(self, index: int):
-        if index < len(self.__fone):
-
+        if 0 <= index < len(self.__fone):
             self.__fone.pop(index)
 
     def toogleFone(self) -> None:
@@ -57,8 +56,8 @@ class Contato:
         self.__name = name 
 
     def __str__(self) -> str:
+        has = "@ " if self.__favorito else "- " 
         fones = ", ".join([str(x) for x in self.__fone])
-
         return f"- {self.__name} [{fones}]"
     
 class Agenda:
@@ -66,8 +65,8 @@ class Agenda:
         self.__contato: list[Contato] = []
 
     def __acharPosDoNome(self, name: str) -> int:
-        for i in range (0, len(self.__contato)-1):
-            if name == self.__contato[i].getName:
+        for i in range (len(self.__contato)):
+            if name == self.__contato[i].getName():
                 return i
         return -1
     
@@ -86,10 +85,25 @@ class Agenda:
                 if f.isValid():
                     contato_novo.addFone(f.getId(), f.getNumber())
             self.__contato.append(contato_novo)
-            self.__contato.sort(key=lambda c: c.getName())
+            self.__contato.sort(key=lambda c: c.getName()) #deixar ordenada
         
-    #def getContato(self):
-
+    def getContato(self, name: str):
+        pos = self.__acharPosDoNome(name)
+        if pos == -1:
+            return None
+        return self.__contato[pos]
+    
+    def rmContato(self, name: str):
+        pos = self.__acharPosDoNome(name)
+        if pos != -1:
+            self.__contato.pop(pos)
+    
+    def procurar(self, pattern: str) -> list[Contato]:
+        resultado = []
+        for i in self.__contato:
+            if pattern in str(i):
+                resultado.append(i)
+        return resultado
 
     def __str__(self) -> str:
         return f"\n".join(str(contato) for contato in self.__contato)
@@ -111,7 +125,18 @@ def main():
             agenda.addcontato(name, fones)
         elif args[0] == "show":
             print(agenda)
-        
+        elif args[0] == "rmFone":
+            name = args[1]
+            index = int(args[2])
+            contato = agenda.getContato(name)
+            if contato:
+                contato.rmFone(index)
+        elif args[0] == "rm":
+            agenda.rmContato(args[1])
+        elif args[0] == "search":
+            resultado = agenda.procurar(args[1])
+            for i in resultado:
+                print (i)
 
 main()
 
