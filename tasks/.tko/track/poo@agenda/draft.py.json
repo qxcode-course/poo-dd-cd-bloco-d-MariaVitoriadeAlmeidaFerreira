@@ -137,8 +137,58 @@
         },
         {
             "label": "2025-12-02_17-00-49",
-            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.__id: str = id\n        self.__number: str = number\n\n    def getId(self) -> str:\n        return self.__id\n    \n    def getNumber(self) -> str:\n        return self.__number\n    \n    def isValid(self) -> bool:\n        valid: str = \"1234567890().\"\n        for c in self.__number:\n            if c not in valid:\n                return False\n        return True\n    \n    def __str__(self) -> str:\n        return f\"{self.__id}:{self.__number}\"\n    \nclass Contato:\n    def __init__(self, name: str):\n        self.__name: str = name\n        self.__fone: list[Fone] = []\n        self.__favorito: bool = False\n\n    def addFone(self, id: str, number: str) -> None:\n        tel = Fone(id, number)\n\n        if tel.isValid():\n            self.__fone.append(tel)\n        else:\n            raise Exception (\"fail: telefone invalido\")\n        \n    def rmFone(self, index: int):\n        if index < len(self.__fone):\n\n            self.__fone.pop(index)\n\n    def toogleFone(self) -> None:\n        if self.__favorito == False:\n            self.__favorito = True\n        else:\n            self.__favorito = False\n        \n    def isFavorito(self) -> bool:\n        return self.__favorito\n\n    def getFone(self) -> list[Fone]:\n        return self.__favorito\n    \n    def getName(self) -> str:\n        return self.__name\n    \n    def setName(self, name: str) -> None:\n        self.__name = name \n\n    def __str__(self) -> str:\n        fones = \", \".join([str(x) for x in self.__fone])\n\n        return f\"- {self.__name} [{fones}]\"\n    \nclass Agenda:\n    def __init__(self):\n        self.__contato: list[Contato] = []\n\n    def __acharPosDoNome(self, name: str) -> int:\n        for i in range (0, len(self.__contato)-1):\n            if name == self.__contato[i]:\n                return i\n        return -1\n    \n    def addcontato(self, name: str, fones: list[Fone]) -> None:\n        index: int = self.__acharPosDoNome(name)\n\n        if index != -1:\n            cont_existe = self.__contato[index]\n            for index in fones:\n                cont_existe.addFone(fones.getId(), fones.getNumber())\n            \n        else:\n            contato_novo = Contato(name)\n            for index in fones:\n                contato_novo.addFone(fones.getId(), fones.getNumber())\n                return \n            self.__contato.append(contato_novo)\n\n    def __str__(self) -> str:\n        return f\"\\n\".join(str(Contato) for Contato in self.__contato)\n\ndef main():\n    agenda = Agenda\n    while True:\n        line: str = input()\n        print(\"$\" + line)\n        args: list[str] = line.split(\" \")\n        if args[0] == \"end\":\n            break\n        elif args[0] == \"show\":\n            print(agenda)\n        elif args[0] == \"add\":\n            name = args[1]\n            fones_list = (args[2])\n\nmain()\n\n",
+            "content": "@@ -1922,16 +1922,21 @@\n    index\n+: int\n  = self.\n@@ -2039,33 +2039,37 @@\n             for \n-f\n+index\n  in fones:%0A     \n@@ -2067,44 +2067,8 @@\n es:%0A\n-                if f.isValid():%0A    \n     \n@@ -2092,32 +2092,36 @@\n existe.addFone(f\n+ones\n .getId(), f.getN\n@@ -2107,32 +2107,36 @@\n fones.getId(), f\n+ones\n .getNumber())%0A  \n@@ -2217,17 +2217,21 @@\n     for \n-f\n+index\n  in fone\n@@ -2237,44 +2237,8 @@\n es:%0A\n-                if f.isValid():%0A    \n     \n@@ -2271,16 +2271,20 @@\n ddFone(f\n+ones\n .getId()\n@@ -2286,16 +2286,20 @@\n tId(), f\n+ones\n .getNumb\n@@ -2296,32 +2296,56 @@\n es.getNumber())%0A\n+                return %0A\n             self\n",
             "lines": "107"
+        },
+        {
+            "label": "2025-12-03_08-44-14",
+            "content": "@@ -2528,18 +2528,16 @@\n = Agenda\n-()\n %0A    whi\n",
+            "lines": "108"
+        },
+        {
+            "label": "2025-12-03_08-50-17",
+            "content": "@@ -2456,17 +2456,17 @@\n oin(str(\n-c\n+C\n ontato) \n@@ -2469,17 +2469,17 @@\n to) for \n-c\n+C\n ontato i\n",
+            "lines": "108"
+        },
+        {
+            "label": "2025-12-03_08-51-43",
+            "content": "@@ -1799,16 +1799,8 @@\n o%5Bi%5D\n-.getName\n :%0A  \n",
+            "lines": "108"
+        },
+        {
+            "label": "2025-12-03_08-52-18",
+            "content": "@@ -1289,19 +1289,23 @@\n self.__f\n-one\n+avorito\n %0A    %0A  \n@@ -2407,44 +2407,8 @@\n vo)%0A\n-        %0A    def getContato(self):%0A%0A\n %0A   \n@@ -2698,16 +2698,74 @@\n   break%0A\n+        elif args%5B0%5D == %22show%22:%0A            print(agenda)%0A\n         \n@@ -2852,75 +2852,8 @@\n %5B2%5D)\n-%0A        elif args%5B0%5D == %22show%22:%0A            print(agenda)%0A        \n %0A%0Ama\n",
+            "lines": "108"
+        },
+        {
+            "label": "2025-12-03_08-56-34",
+            "content": "@@ -2416,9 +2416,8 @@\n     \n-#\n def \n",
+            "lines": "112"
+        },
+        {
+            "label": "2025-12-03_08-56-45",
+            "content": "@@ -2805,94 +2805,29 @@\n     \n-id\n+fones_list\n  = \n+(\n args%5B2%5D\n-%0A            num = args%5B3%5D%0A            agenda.addcontato(name, (%5Bid, num%5D)\n )%0A  \n",
+            "lines": "112"
+        },
+        {
+            "label": "2025-12-03_09-06-30",
+            "content": "@@ -2805,17 +2805,19 @@\n     \n-fones = %5B\n+id = args%5B2\n %5D%0A  \n@@ -2830,26 +2830,21 @@\n     \n-for f in\n+num =\n  args%5B\n-2:%5D:\n+3%5D\n %0A   \n@@ -2856,33 +2856,43 @@\n     \n-    id, num = f.split(%22:%22\n+agenda.addcontato(name, (%5Bid, num%5D)\n )%0A  \n",
+            "lines": "114"
+        },
+        {
+            "label": "2025-12-03_09-08-49",
+            "content": "@@ -2886,95 +2886,8 @@\n :%22)%0A\n-                fones.append(Fone(id, num))%0A            agenda.addcontato(name, fones)%0A\n     \n",
+            "lines": "114"
+        },
+        {
+            "label": "2025-12-03_09-09-56",
+            "content": "@@ -2403,67 +2403,8 @@\n vo)%0A\n-            self.__contato.sort(key=lambda c: c.getName())%0A\n     \n",
+            "lines": "116"
+        },
+        {
+            "label": "2025-12-03_09-12-04",
+            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.__id: str = id\n        self.__number: str = number\n\n    def getId(self) -> str:\n        return self.__id\n    \n    def getNumber(self) -> str:\n        return self.__number\n    \n    def isValid(self) -> bool:\n        valid: str = \"1234567890().\"\n        for c in self.__number:\n            if c not in valid:\n                return False\n        return True\n    \n    def __str__(self) -> str:\n        return f\"{self.__id}:{self.__number}\"\n    \nclass Contato:\n    def __init__(self, name: str):\n        self.__name: str = name\n        self.__fone: list[Fone] = []\n        self.__favorito: bool = False\n\n    def addFone(self, id: str, number: str) -> None:\n        tel = Fone(id, number)\n\n        if tel.isValid():\n            self.__fone.append(tel)\n        else:\n            raise Exception (\"fail: telefone invalido\")\n        \n    def rmFone(self, index: int):\n        if index < len(self.__fone):\n\n            self.__fone.pop(index)\n\n    def toogleFone(self) -> None:\n        if self.__favorito == False:\n            self.__favorito = True\n        else:\n            self.__favorito = False\n        \n    def isFavorito(self) -> bool:\n        return self.__favorito\n\n    def getFone(self) -> list[Fone]:\n        return self.__fone\n    \n    def getName(self) -> str:\n        return self.__name\n    \n    def setName(self, name: str) -> None:\n        self.__name = name \n\n    def __str__(self) -> str:\n        fones = \", \".join([str(x) for x in self.__fone])\n\n        return f\"- {self.__name} [{fones}]\"\n    \nclass Agenda:\n    def __init__(self):\n        self.__contato: list[Contato] = []\n\n    def __acharPosDoNome(self, name: str) -> int:\n        for i in range (0, len(self.__contato)-1):\n            if name == self.__contato[i].getName:\n                return i\n        return -1\n    \n    def addcontato(self, name: str, fones: list[Fone]) -> None:\n        index = self.__acharPosDoNome(name)\n\n        if index != -1:\n            cont_existe = self.__contato[index]\n            for f in fones:\n                if f.isValid():\n                    cont_existe.addFone(f.getId(), f.getNumber())\n            \n        else:\n            contato_novo = Contato(name)\n            for f in fones:\n                if f.isValid():\n                    contato_novo.addFone(f.getId(), f.getNumber())\n            self.__contato.append(contato_novo)\n            self.__contato.sort(key=lambda c: c.getName())\n        \n    #def getContato(self):\n\n\n    def __str__(self) -> str:\n        return f\"\\n\".join(str(contato) for contato in self.__contato)\n\ndef main():\n    agenda = Agenda()\n    while True:\n        line: str = input()\n        print(\"$\" + line)\n        args: list[str] = line.split(\" \")\n        if args[0] == \"end\":\n            break\n        elif args[0] == \"add\":\n            name = args[1]\n            fones = []\n            for f in args[2:]:\n                id, num = f.split(\":\")\n                fones.append(Fone(id, num))\n            agenda.addcontato(name, fones)\n        elif args[0] == \"show\":\n            print(agenda)\n        \n\nmain()\n\n",
+            "lines": "117"
         }
     ]
 }

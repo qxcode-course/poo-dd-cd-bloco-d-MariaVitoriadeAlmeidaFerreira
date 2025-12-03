@@ -48,7 +48,7 @@ class Contato:
         return self.__favorito
 
     def getFone(self) -> list[Fone]:
-        return self.__favorito
+        return self.__fone
     
     def getName(self) -> str:
         return self.__name
@@ -67,41 +67,51 @@ class Agenda:
 
     def __acharPosDoNome(self, name: str) -> int:
         for i in range (0, len(self.__contato)-1):
-            if name == self.__contato[i]:
+            if name == self.__contato[i].getName:
                 return i
         return -1
     
     def addcontato(self, name: str, fones: list[Fone]) -> None:
-        index: int = self.__acharPosDoNome(name)
+        index = self.__acharPosDoNome(name)
 
         if index != -1:
             cont_existe = self.__contato[index]
-            for index in fones:
-                cont_existe.addFone(fones.getId(), fones.getNumber())
+            for f in fones:
+                if f.isValid():
+                    cont_existe.addFone(f.getId(), f.getNumber())
             
         else:
             contato_novo = Contato(name)
-            for index in fones:
-                contato_novo.addFone(fones.getId(), fones.getNumber())
-                return 
+            for f in fones:
+                if f.isValid():
+                    contato_novo.addFone(f.getId(), f.getNumber())
             self.__contato.append(contato_novo)
+            self.__contato.sort(key=lambda c: c.getName())
+        
+    #def getContato(self):
+
 
     def __str__(self) -> str:
-        return f"\n".join(str(Contato) for Contato in self.__contato)
+        return f"\n".join(str(contato) for contato in self.__contato)
 
 def main():
-    agenda = Agenda
+    agenda = Agenda()
     while True:
         line: str = input()
         print("$" + line)
         args: list[str] = line.split(" ")
         if args[0] == "end":
             break
-        elif args[0] == "show":
-            print(agenda)
         elif args[0] == "add":
             name = args[1]
-            fones_list = (args[2])
+            fones = []
+            for f in args[2:]:
+                id, num = f.split(":")
+                fones.append(Fone(id, num))
+            agenda.addcontato(name, fones)
+        elif args[0] == "show":
+            print(agenda)
+        
 
 main()
 
