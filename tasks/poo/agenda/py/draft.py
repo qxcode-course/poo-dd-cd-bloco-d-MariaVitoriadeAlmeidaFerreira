@@ -56,9 +56,9 @@ class Contato:
         self.__name = name 
 
     def __str__(self) -> str:
-        has = "@ " if self.__favorito else "- " 
+        has = "@" if self.__favorito else "-" 
         fones = ", ".join([str(x) for x in self.__fone])
-        return f"- {self.__name} [{fones}]"
+        return f"{has} {self.__name} [{fones}]"
     
 class Agenda:
     def __init__(self):
@@ -76,14 +76,11 @@ class Agenda:
         if index != -1:
             cont_existe = self.__contato[index]
             for f in fones:
-                if f.isValid():
-                    cont_existe.addFone(f.getId(), f.getNumber())
-            
+                cont_existe.addFone(f.getId(), f.getNumber())
         else:
             contato_novo = Contato(name)
             for f in fones:
-                if f.isValid():
-                    contato_novo.addFone(f.getId(), f.getNumber())
+                contato_novo.addFone(f.getId(), f.getNumber())
             self.__contato.append(contato_novo)
             self.__contato.sort(key=lambda c: c.getName()) #deixar ordenada
         
@@ -135,6 +132,14 @@ def main():
             agenda.rmContato(args[1])
         elif args[0] == "search":
             resultado = agenda.procurar(args[1])
+            for i in resultado:
+                print (i)
+        elif args[0] == "tfav":
+            contato = agenda.getContato(args[1])
+            if contato is not None:
+                contato.toogleFone()
+        elif args[0] == "favs":
+            resultado = agenda.procurar("@")
             for i in resultado:
                 print (i)
 
